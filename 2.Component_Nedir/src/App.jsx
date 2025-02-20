@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import './App.css'
-import Login from './Login'
-import { isimler } from './Login'
+import Login from './Login' // Login componentini import ediyoruz.
+import { isimler } from './Login' // isimler dizisini import ediyoruz.
 
 function App() {
-  console.log(isimler)
+  console.log(isimler) // isimler dizisini konsola yazdırıyoruz.
 
 
   return (
