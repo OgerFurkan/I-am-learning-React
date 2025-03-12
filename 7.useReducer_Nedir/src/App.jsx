@@ -35,7 +35,7 @@ function App() {
   // reducer, state ve action adında iki adet parametre alır.
   // state, state'in güncel değerini tutar.
   // action, type adında bir özelliğe sahiptir. type ile hangi işlemi yapacağımızı belirtiriz.
-
+  
   const [state, dispatch] = useReducer(reducer, initialState)
   // state, 0 değerini tutar.
   // dispatch, state'i güncellemek için kullanılır.
