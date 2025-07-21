@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.add-note-form{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 15px;
+    margin-top:50px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid lightgray;
+}
+.note-form-title{
+    border: none;
+    border-bottom: 2px solid black;
+    padding:10px 32px;
+    outline: none;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+.note-form-body{
+    width: 100%;
+    height: 200px;
+    border: 2px solid black;
+    resize: none;
+    padding:10px 32px;
+    outline: none;
+    font-size: 1.2rem;
+}
+.note-form-submit{
+    width: 40%;
+    align-self: center;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: aliceblue;
+    transition: all .3s;
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+.note-form-submit:hover{
+    background-color: black;
+    border: 2px solid aliceblue;
+    color: aliceblue;
+    scale: 1.2;
+    cursor: pointer;
+}
