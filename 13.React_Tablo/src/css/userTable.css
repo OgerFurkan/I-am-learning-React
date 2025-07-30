@@ -1,0 +1,107 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.table-wrapper{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    margin:1.5rem auto;
+    border: 1px solid rgba(128, 128, 128, 0.534);
+    border-radius: 5px;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+thead th{ 
+    padding: 0.8rem;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.534);
+    background-color:aliceblue ;
+    color: rgba(0, 0, 0, 0.582);
+    text-transform: capitalize;
+    width: 100px;
+}
+
+tbody td{
+    border-bottom: 1px solid rgb(216, 216, 216);
+    padding: 0.8rem;
+    font-weight: 600;
+}
+
+tbody tr:hover{
+    background-color: #c7e6ff;
+    cursor: pointer;
+}
+
+.user-button{
+    padding: 0.5rem 0.8rem;
+    border: 1px solid gray;
+    border-radius:40px;
+    margin:2px;
+    color: #fff;
+    transition: transform .05s ease-in;
+}
+
+.user-button:hover{
+    cursor: pointer;
+    transform:  scale(1.1);
+}
+
+.user-button:active{
+    transform:  scale(0.9);
+}
+
+.delete-user{
+    background-color: #D52121;
+}
+.edit-user{
+    background-color: #2257E3;
+}
+
+td>input{
+    width: 90%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid black;
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.cancel-user-edit{
+    background-color: #D52121;
+}
+.save-user-edit{
+    background-color: #20831d;
+}
+
+.no-users-info{
+    text-align: left;
+    margin: 1rem;
+    border: 1px solid lightgray;
+    background-color: #efc372;
+    padding: 2rem;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    color: black;
+    font-weight: 900;
+}
+
+.user-search{
+    width: 20%;
+    margin: 2.5rem auto;
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+.user-search > input{
+    outline: none;
+    border: none;
+    width: 90%;
+    padding: 0.5rem 0;
+    font-size:1.5rem;
+}
