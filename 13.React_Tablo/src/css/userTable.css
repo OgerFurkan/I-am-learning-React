@@ -3,6 +3,8 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+/*  Tablo CSS   */
 .table-wrapper{
     width: 80%;
     display: flex;
@@ -16,6 +18,11 @@ table{
     border-collapse: collapse;
     text-align: left;
 }
+
+
+
+
+/*  Tablo Başlık CSS   */
 thead th{ 
     padding: 0.8rem;
     border-bottom: 1px solid rgba(128, 128, 128, 0.534);
@@ -24,18 +31,30 @@ thead th{
     text-transform: capitalize;
     width: 100px;
 }
+/*  Tablo Sıralama Icon CSS   */
+.user-sort-icon{
+    margin:0 0 -4px 10px;
+    font-size: 1.2rem;
+}
+.user-sort-icon:hover{
+    cursor: pointer;
+    color: rgb(4, 0, 228);
+}
 
+
+
+
+/*  Tablo İçerik CSS   */
 tbody td{
     border-bottom: 1px solid rgb(216, 216, 216);
     padding: 0.8rem;
     font-weight: 600;
 }
-
 tbody tr:hover{
     background-color: #c7e6ff;
     cursor: pointer;
 }
-
+/*  Tablo İşlemler Kısmı CSS   */
 .user-button{
     padding: 0.5rem 0.8rem;
     border: 1px solid gray;
@@ -44,7 +63,6 @@ tbody tr:hover{
     color: #fff;
     transition: transform .05s ease-in;
 }
-
 .user-button:hover{
     cursor: pointer;
     transform:  scale(1.1);
@@ -61,6 +79,11 @@ tbody tr:hover{
     background-color: #2257E3;
 }
 
+
+
+
+
+/*  Tablo Edit Kısmı CSS   */
 td>input{
     width: 90%;
     background-color: transparent;
@@ -71,7 +94,6 @@ td>input{
     font-size: 1rem;
     font-weight: 600;
 }
-
 .cancel-user-edit{
     background-color: #D52121;
 }
@@ -79,6 +101,11 @@ td>input{
     background-color: #20831d;
 }
 
+
+
+
+
+/*  Tablo Bilgilendirme CSS   */
 .no-users-info{
     text-align: left;
     margin: 1rem;
@@ -91,11 +118,17 @@ td>input{
     font-weight: 900;
 }
 
+
+
+
+/*  Tablo Arama Kısmı CSS   */
 .user-search{
-    width: 20%;
+    width: 25%;
+    padding: 0 20px;
     margin: 2.5rem auto;
     text-align: center;
     border-bottom: 1px solid black;
+    white-space: nowrap;
 }
 
 .user-search > input{
@@ -105,3 +138,15 @@ td>input{
     padding: 0.5rem 0;
     font-size:1.5rem;
 }
+.user-search-icon{
+    margin-left: 10px;
+}
+.user-delete-icon{
+    margin: 0 0 -4px 10px;
+    font-size: 1.5rem;
+}
+.user-delete-icon:hover{
+    color: #D52121;
+    cursor: pointer;
+}
+

@@ -30,7 +30,7 @@ function movie({movie}) {
     
   return (
     
-    <div className='movie-wrapper'>
+    <div className='movie-wrapper' >
         <span className="movie-fav">
                 {
                 isFavorite 

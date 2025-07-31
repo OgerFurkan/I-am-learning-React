@@ -1,10 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice} from '@reduxjs/toolkit'
 import {userData} from '../../data/users'
-
 
 const initialState = {
   users: userData,
-  filteredUsers: [],
+  filteredUsers:userData,
+  searchQuery:""
+}
+
+const filterBySearchQuery=(users,searchTerm)=>{
+  if(!searchTerm) {
+    return users;
+  } 
+
+  return users.filter((user)=>{
+     const toArray=[
+      user.id,
+      user.name,
+      user.surname,
+      user.email,
+      user.age
+    ]
+    return toArray.some((value)=>{
+       return value.toString().toLocaleLowerCase().includes(searchTerm)
+    })
+  })
 }
 
 export const usersSlice = createSlice({
@@ -20,6 +39,7 @@ export const usersSlice = createSlice({
         return user;
       })
       state.users=updatedUsers;
+      state.filteredUsers=filterBySearchQuery(state.users,state.searchQuery)
     },
     deleteUserById:(state,action)=>{
       const userId=action.payload;
@@ -31,29 +51,15 @@ export const usersSlice = createSlice({
       else{
         alert("User not found.")
       }
+      state.filteredUsers=filterBySearchQuery(state.users,state.searchQuery)
     },
     addNewUser:(state,action)=>{
         const newUser = action.payload;
         newUser && state.users.push(newUser);
     },
     searchAnUser:(state,action)=>{
-      const searchQuery = action.payload.toString().toLocaleLowerCase();
-      if(!searchQuery){
-        state.filteredUsers=state.users;
-        return;
-      }
-      state.filteredUsers=state.users.filter((user)=>{
-        const toArray=[
-          user.id,
-          user.name,
-          user.surname,
-          user.email,
-          user.age
-        ]
-        return toArray.some((value)=>{
-          return value.toString().toLocaleLowerCase().includes(searchQuery);
-        })
-      })
+      state.searchQuery = action.payload.toString().toLocaleLowerCase();
+      state.filteredUsers=filterBySearchQuery(state.users,state.searchQuery)
     }
   }
 })
