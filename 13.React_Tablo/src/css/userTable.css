@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #f5f7fa;
 }
 
 /*  Tablo CSS   */
@@ -33,6 +34,7 @@ thead th{
 }
 /*  Tablo Sıralama Icon CSS   */
 .user-sort-icon{
+    background-color: inherit;
     margin:0 0 -4px 10px;
     font-size: 1.2rem;
 }
@@ -148,5 +150,65 @@ td>input{
 .user-delete-icon:hover{
     color: #D52121;
     cursor: pointer;
+}
+
+
+/*  Tablo Kullanıcı Ekleme Fom Kısmı CSS   */
+.add-user-form{
+    margin: 2.5rem auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
+    padding: 2.5rem 0;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+.add-user-form h1{
+    color: rgb(141, 141, 141);
+}
+.add-user-form input{
+    padding: 8px 16px;
+    border-radius: 5px;
+    width: 25%;
+    transition: all 0.2s ease-in;
+}
+.add-user-form input::placeholder{
+    color: black;
+    font-weight: 600
+}
+.add-user-form>input:focus{
+    font-size: 2em;
+    padding: 16px;
+}
+.button-wrapper{
+    width: 25%;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+.button-wrapper input{
+    color: #fff;
+    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.322);
+}
+.button-wrapper input:first-child{
+    background-color: #10440e;
+}
+.button-wrapper input:first-child:hover{
+    cursor: pointer;
+    background-color: #20831d;
+    transform: scale(1.1);
+}
+.button-wrapper input:last-child{
+    background-color: #741111;
+}
+.button-wrapper input:last-child:hover{
+    cursor: pointer;
+    background-color: #D52121;
+    transform: scale(1.1);
 }
 
