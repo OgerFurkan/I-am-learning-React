@@ -7,9 +7,15 @@ import UserRow from './UserRow';
 import UserColumnHeader from './UserColumnHeader';
 import AddUserForm from './AddUserForm'
 import {searchAnUser } from '../redux/slices/usersSlice';
+import BaseModal from '../modal/BaseModal';
 
 function UserTable() {
   const dispatch = useDispatch();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+  
   const [sorting,setSorting]=useState({
     key:null,
     type:"asc"
@@ -41,8 +47,6 @@ function UserTable() {
     )
   }
 
-
-
   const handleSort=(key)=>{
     setSorting({
       key:key,
@@ -54,14 +58,18 @@ function UserTable() {
     dispatch(searchAnUser(e.target.value));
   };
 
-
   return (
   <>
-    <AddUserForm/>
+    <div className='add-new-user-modal'>
+            <button onClick={openModal}>Add New User</button>
+            <BaseModal isOpen={isModalOpen} onClose={closeModal}>
+                <AddUserForm onClose={closeModal}/>
+            </BaseModal>
+    </div>
     <div className="user-search">
       <input type="text" value={searchValue} onChange={handleSearchChange} placeholder='Search Something'/>
         {
-          searchValue.length>0 ?  <TiDeleteOutline className='user-delete-icon'
+          searchValue.length>0 ?  <TiDeleteOutline className='user-clear-search-icon'
           onClick={()=>{setSearchValue(""),
             dispatch(searchAnUser(""))
           }}/> : <FaSearch className='user-search-icon'/>
@@ -88,7 +96,7 @@ function UserTable() {
          </tr>
          ):
             sortedUsers?.map((user)=>(
-              <UserRow key={user.id} user={user}/>
+              <UserRow key={`${user.id} - ${user.name}`} user={user}/>
             ))
         }
       </tbody>

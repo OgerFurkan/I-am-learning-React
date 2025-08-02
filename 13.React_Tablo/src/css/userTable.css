@@ -80,6 +80,12 @@ tbody tr:hover{
 .edit-user{
     background-color: #2257E3;
 }
+.confirm-delete-button{
+    background-color: #20831d;
+}
+.cancel-delete-button{
+    background-color: #D52121;
+}
 
 
 
@@ -132,7 +138,6 @@ td>input{
     border-bottom: 1px solid black;
     white-space: nowrap;
 }
-
 .user-search > input{
     outline: none;
     border: none;
@@ -143,19 +148,21 @@ td>input{
 .user-search-icon{
     margin-left: 10px;
 }
-.user-delete-icon{
+.user-clear-search-icon{
     margin: 0 0 -4px 10px;
     font-size: 1.5rem;
 }
-.user-delete-icon:hover{
+.user-clear-search-icon:hover{
     color: #D52121;
     cursor: pointer;
 }
 
 
+
+
 /*  Tablo Kullanıcı Ekleme Fom Kısmı CSS   */
 .add-user-form{
-    margin: 2.5rem auto 0;
+    margin:0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -180,11 +187,11 @@ td>input{
     font-weight: 600
 }
 .add-user-form>input:focus{
-    font-size: 2em;
+    font-size: 1.5em;
     padding: 16px;
 }
 .button-wrapper{
-    width: 25%;
+    width: 30%;
     display: flex;
     gap: 20px;
     align-items: center;
@@ -212,3 +219,48 @@ td>input{
     transform: scale(1.1);
 }
 
+
+
+
+/*  Add New User Modal CSS  */
+.add-new-user-modal{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 2.5rem auto;
+    padding: 2.5rem;
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+}
+.add-new-user-modal>button{
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: all 0.1s ease-in;
+    background-color: aliceblue;
+    border-color: #00000077;
+}
+.add-new-user-modal>button:hover{
+    cursor: pointer;
+    background-color: #2257E3;
+    transform: scale(1.2);
+    color: white;
+}
+
+
+
+
+/*  Delete Confirmation Modal CSS   */
+.user-delete-confirmation-modal{
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 2.5rem;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+.user-delete-confirmation-modal button{
+    width: 100%;
+}
