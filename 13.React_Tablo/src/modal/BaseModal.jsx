@@ -15,6 +15,7 @@ function BaseModal({ isOpen, onClose, children }) {
                 </button>
                 {children}
             </div>
+            
         </>,
         document.getElementById('modal-root')
     );

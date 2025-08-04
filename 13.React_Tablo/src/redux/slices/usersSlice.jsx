@@ -1,5 +1,6 @@
 import { createSlice} from '@reduxjs/toolkit'
 import {userData} from '../../data/users'
+import { toast } from 'react-toastify';
 
 const getUsersFromLocalStorage = ()=>{
   const usersFromLocaleStorage = localStorage.getItem("users")
@@ -40,36 +41,60 @@ const filterBySearchQuery=(users,searchTerm)=>{
   })
 }
 
+const toastSuccess=(message,userId)=> toast.success(
+       <div>
+        <h3>{message}</h3>
+        <p style={{color: "black"}}>User ID : {userId}</p>
+      </div>,{
+        style: {
+          backgroundColor: "transparent",
+          color: "#20831d",
+        }
+});
+const toastInfo=(message,userId)=>toast.info( 
+        <div>
+          <h3>{message}</h3>
+          <p style={{color: "black",marginTop:"5px"}}>User ID : {userId}</p>
+        </div>,{
+          style: {
+          backgroundColor: "transparent",
+          color: "#007EC6",
+        }
+});
+
 export const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
     updateUser:(state, action)=>{
-      const updatedUser=action.payload;
-      state.users = state.users?.map((user)=>{
-        if(user.id===updatedUser.id){
-          return updatedUser;
-        }
-        return user;
-      })
-      state.filteredUsers=filterBySearchQuery(state.users,state.searchQuery)
-      saveUsersToLocalStorage(state.users);
-    },
-    deleteUserById:(state,action)=>{
-      const userId=action.payload;
-      state.users = state.users.filter((user) => user.id !== userId);
-      state.filteredUsers=filterBySearchQuery(state.users,state.searchQuery)
-      saveUsersToLocalStorage(state.users);
-    },
-    addNewUser:(state,action)=>{
-        const newUser = action.payload;
-        newUser && state.users.push(newUser);
+        const updatedUser=action.payload;
+        state.users = state.users?.map((user)=>{
+          if(user.id===updatedUser.id){
+            return updatedUser;
+          }
+          return user;
+        })
         state.filteredUsers=filterBySearchQuery(state.users,state.searchQuery)
         saveUsersToLocalStorage(state.users);
+        toastSuccess("The user has been updated!",updatedUser.id)
+    },
+    deleteUserById:(state,action)=>{
+        const userId=action.payload;
+        state.users = state.users.filter((user) => user.id !== userId);
+        state.filteredUsers=filterBySearchQuery(state.users,state.searchQuery)
+        saveUsersToLocalStorage(state.users);
+        toastInfo("The user has been deleted!",userId)
+    },
+    addNewUser:(state,action)=>{
+          const newUser = action.payload;
+          newUser && state.users.push(newUser);
+          state.filteredUsers=filterBySearchQuery(state.users,state.searchQuery)
+          saveUsersToLocalStorage(state.users);
+          toastSuccess("The user has been added!",newUser.id)
     },
     searchAnUser:(state,action)=>{
-      state.searchQuery = action.payload.toString().toLocaleLowerCase().trim()
-      state.filteredUsers=filterBySearchQuery(state.users,state.searchQuery)
+        state.searchQuery = action.payload.toString().toLocaleLowerCase().trim()
+        state.filteredUsers=filterBySearchQuery(state.users,state.searchQuery)
     }
   }
 })

@@ -9,6 +9,7 @@ import AddUserForm from './AddUserForm'
 import {searchAnUser } from '../redux/slices/usersSlice';
 import BaseModal from '../modal/BaseModal';
 
+
 function UserTable() {
   const dispatch = useDispatch();
 

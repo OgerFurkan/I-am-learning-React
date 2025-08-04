@@ -2,6 +2,8 @@ import React, {useState } from 'react'
 import {useDispatch } from "react-redux"
 import { deleteUserById, updateUser } from '../redux/slices/usersSlice';
 import BaseModal from '../modal/BaseModal';
+import { toast } from 'react-toastify';
+
 
 function UserRow({user}) {
   const dispatch=useDispatch();
@@ -44,8 +46,7 @@ function UserRow({user}) {
           <div className="button-wrapper">
          <button className='confirm-delete-button user-button' onClick={()=>{handleDelete(user.id),closeModal()}}>Yes</button>
             <button className='cancel-delete-button user-button' onClick={closeModal}>No</button>
-          </div>
-          
+          </div> 
         </div>
       </BaseModal>
      
