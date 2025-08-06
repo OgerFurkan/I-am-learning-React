@@ -12,7 +12,7 @@ function RouterConfig() {
         <Route path='/' element={<Home/>}/>
         <Route path='/movies' element={<Movies/>}></Route>
         <Route path='/favorites' element={<Favorites/>}></Route>
-        <Route path='/movie-details/:movie' element={<MovieDetails/>}></Route>
+        <Route path='/movie-details/:id' element={<MovieDetails/>}></Route>
          <Route path='*' element={<NotFoundPage/>}></Route>
     </Routes>
   )

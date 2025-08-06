@@ -2,7 +2,8 @@ import React from 'react'
 import {Link} from "react-router-dom"
 import { useSelector,useDispatch } from 'react-redux';
 import { useEffect,useState } from 'react';
-import { fetchAllGenres,addToFavorites,removeFromFavorites } from '../redux/slices/moviesSlice';
+import {addToFavorites,removeFromFavorites } from '../redux/slices/moviesSlice';
+import {fetchAllGenres} from "../redux/slices/genreSlice"
 import "../css/movie.css"
 import { MdFavoriteBorder,MdFavorite,MdStar} from "react-icons/md";
 
@@ -12,7 +13,7 @@ function movie({movie}) {
 
     const {genre_ids,id,title,overview,poster_path,vote_average} = movie;
  
-    const {genres,genreStatus,genreError,favoritesMovies} = useSelector((store)=>store.movies);
+    const {genres,status:genreStatus,error:genreError} = useSelector((store)=>store.genres);
     
     const [isFavorite,setIsFavorite] = useState(false)
     

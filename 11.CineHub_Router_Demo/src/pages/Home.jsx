@@ -7,11 +7,8 @@ import "../css/home.css"
 
 function Home() {
     const dispatch=useDispatch();
-    const {movies} = useSelector((store)=>store.movies);
-    const {status} = useSelector((store)=>store.movies);
-    const {error} = useSelector((store)=>store.movies);
-    const {favoritesMovies} = useSelector((store)=>store.movies);
-
+    const {movies,status,error,favoritesMovies} = useSelector((store)=>store.movies);
+    
     useEffect(()=>{
         if(status=="idle") dispatch(fetchMoviesByPage(1))
     },[])

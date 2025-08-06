@@ -1,0 +1,37 @@
+import { createSlice,createAsyncThunk } from '@reduxjs/toolkit'
+import axios from "axios"
+
+const initialState = {
+    genres:[],
+    status:"idle",
+    error:null,
+}
+
+export const fetchAllGenres= createAsyncThunk("fetchAllGenres",async()=>{
+    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/genre/movie/list?api_key=${import.meta.env.VITE_API_KEY}`)
+    return response.data.genres
+})
+
+export const genreSlice = createSlice({
+  name: 'genres',
+  initialState,
+  reducers: {
+
+  },
+  extraReducers:(builder)=>{
+    builder.addCase(fetchAllGenres.pending,(state)=>{
+        state.status="loading";
+    })
+    builder.addCase(fetchAllGenres.rejected,(state,action)=>{
+        state.status="failed";
+        state.error=action.payload;
+    })
+    builder.addCase(fetchAllGenres.fulfilled,(state,action)=>{
+        state.status="succeeded";
+        state.genres=action.payload;
+    })
+}
+})
+
+export const {} = genreSlice.actions
+export default genreSlice.reducer

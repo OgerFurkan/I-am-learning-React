@@ -111,3 +111,15 @@
     transform: scale(0.90);
     color: #fff;
 }
+
+
+
+@media (max-width:550px) {
+ .movie-wrapper{
+    width: 300px;
+    height: 450px;
+ }
+ .movie-poster{
+    width: 300px;
+ }
+}
