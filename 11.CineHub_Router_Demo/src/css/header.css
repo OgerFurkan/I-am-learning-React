@@ -92,6 +92,76 @@ header{
     opacity: 70%;
 }
 
+/*  Nav Results CSS */
+.nav-results{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    position: absolute;
+    background-color: #071426ce;
+    top: 100%;
+    left: 30%;
+    width: 40%;
+    padding: 16px;
+    border: 1px solid white;
+    border-top-color: rgba(255, 255, 255, 0.062);
+    max-height: 50vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.nav-results a{
+    text-decoration: none;
+    color: white;
+}
+.nav-result-movie-wrapper{
+    display: flex;
+    padding: 16px;
+    gap: 16px;
+    cursor: pointer;
+    transition: all 0.1s;
+    border-bottom: 1px solid white;
+}
+.nav-result-movie-wrapper:hover{
+    background-color: #f44531c7;
+    transform: scale(1.05);
+}
+.nav-result-movie-poster{
+    border: 1px solid white;
+}
+.nav-result-movie-poster-not-found{
+    min-width: 156px;
+    max-width: 156px;
+    height: 233px;
+    border: 1px solid white;
+    background-color: #071426;
+    padding: 16px;
+}
+.nav-result-movie-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+.nav-result-movie-header{
+    font-weight: bold;
+    font-size: 1.5rem;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+.nav-result-movie-rate{
+    display: flex;
+    gap: 4px;
+}
+.nav-result-movie-rate-icon{
+    color: goldenrod;
+}
+.nav-result-movie-overview{
+    text-align: justify;
+    font-weight: normal;
+}
+
 @media (max-width:1440px){
     header{
         padding: 15px 5%;
@@ -144,3 +214,10 @@ header{
     }
 }
 
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.3); }
+    50% { transform: scale(1.2); }
+    75% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}

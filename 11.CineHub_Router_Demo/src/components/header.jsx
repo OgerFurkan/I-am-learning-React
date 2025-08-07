@@ -1,27 +1,109 @@
-import React from 'react'
+import React, {useCallback, useEffect, useState } from 'react'
 import "../css/header.css"
 import { Link } from 'react-router-dom'
 import { FaHeart } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
-import{useSelector} from "react-redux"
+import {MdStar} from "react-icons/md";
+import{useDispatch, useSelector} from "react-redux"
+import {clearResults, fetchMovies} from '../redux/slices/searchMovieSlice';
 
 function header() {
+  const dispatch = useDispatch()
+  const [searchValue,setSearchValue]=useState("")
 
   const {favoritesMovies} = useSelector((store)=> store.movies)
+  const {query, movies} = useSelector((store)=> store.searchMovie)
+
+   const shakeAnimation = {
+      animationName: "heartbeat",
+      animationDuration: "0.1s",
+      animationIterationCount: "infinite",
+      animationTimingFunction: "linear"
+    }
+
+    const [isAdded,setIsAdded]=useState(false)
+  
+  useEffect(()=>{
+    setIsAdded(true)
+    setTimeout(()=>{
+      setIsAdded(false)
+    },500)
+  },[favoritesMovies.length])
+
+  useEffect(()=>{
+    if (searchValue.length > 0) {
+      dispatch(fetchMovies(searchValue));
+    } else {
+      dispatch(clearResults());
+    }
+     
+  },[searchValue, dispatch])
+  
+  const handleSearchInputChange = useCallback((e)=>{
+    setSearchValue(e.target.value)
+  },[])
+  const handleClearResult = ()=>{
+    setSearchValue("")
+    dispatch(clearResults())
+  }
 
   return (
     <header>    
         <Link to={"/"}> <img src="/images/cinehub_178-60.png"  alt="logo" id="logo"/></Link>
         <div className="nav-search">
-          <input type="text" id="search-input" placeholder='Search' />
+          <input type="text" value={searchValue} id="search-input" placeholder='Search' onChange={handleSearchInputChange} />
           <label htmlFor="search-input">
             <CiSearch className='nav-search-icon'/>
           </label>
         </div>
+        {
+            movies.length>0 ?
+             <div className="nav-results">
+            {
+                 movies?.map((movie)=>(
+                <Link to={`/movie-details/${movie.id}`}>
+                  <div key={movie.id} className="nav-result-movie-wrapper" onClick={handleClearResult}>
+                      {
+                        <>
+                          {
+                            movie.poster_path ? <img className='nav-result-movie-poster' src={`https://image.tmdb.org/t/p/w154/${movie.poster_path}`} alt={movie.title} />:
+                            <img className='nav-result-movie-poster-not-found' src={"/images/Logo.png"} alt={movie.title}/>
+                            
+                          }
+                          <div className="nav-result-movie-info">
+                            <div className="nav-result-movie-header">
+                              <p className='nav-result-movie-title'>
+                                {
+                                  movie.title
+                                }
+                              </p>
+                              -
+                              <p className="nav-result-movie-rate">
+                                <MdStar className='nav-result-movie-rate-icon'/>{Number(movie.vote_average).toFixed(1)}
+                              </p>
+                            </div>
+                        <p className="nav-result-movie-overview">
+                            {
+                              movie.overview
+                            }
+                        </p>
+                          </div>
+                          
+                        </>
+                      }
+                    </div>
+                  </Link>
+              ))
+            }
+          </div>:
+            ""
+          }
+          
+
         <ul className="nav">
             <li><Link to={"/"}>Home</Link></li>
             <li><Link to={"/movies"}>Movies</Link></li>
-            <li><Link to={"/favorites"}><FaHeart /><span className='count-favs'>{favoritesMovies.length}</span></Link></li>
+            <li><Link to={"/favorites"}><FaHeart style={isAdded ? shakeAnimation : undefined} /><span className='count-favs'>{favoritesMovies.length}</span></Link></li>
         </ul>
     </header>
   )

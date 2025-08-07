@@ -18,7 +18,7 @@
 }
 
 .logo-name{
-    height: 100px;
+  height: 250px;
 }
 .logo{
     height: 200px;
@@ -45,29 +45,58 @@
 }
 
 .home-left-title{
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
+  display: flex;
+  flex-direction: row;
 }
 .header-title{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-evenly;
-    color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  color: #fff;
 }
 .header-1{
-    color: #f44531;
-    font-weight: normal;
-    font-size: 2em;
+  color: #f44531;
+  font-weight: normal;
+  font-size: 2em;
 }
 .header-title .header-2{
-    font-size: 4em;
+  font-size: 4em;
 }
 .header-3{
-    align-self: flex-end;
-    color: #f44531;
-    font-size: 1em;
+  align-self: flex-end;
+  color: #f44531;
+  font-size: 1em;
+}
+.home-page-changer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+}
+.page-changer-icon{
+  font-size: 3em;
+  cursor: pointer;
+  transition: all 0.1s; 
+  user-select: none;
+  border-radius: 50%;
+  background-color: #071426;
+  color: #f44531;
+}
+.page-changer-icon:hover{
+  transform: scale(1.1);
+  background-color: #071426;
+  color: white;
+ 
+}
+.page-number{
+  font-size: 1.5em;
+  font-weight: bold;
+  color: white;
+}
+.selected{
+  font-size: 2.5rem;
 }
 
 @media (max-width:1440px) {

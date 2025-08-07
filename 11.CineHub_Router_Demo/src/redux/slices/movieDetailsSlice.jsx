@@ -6,10 +6,16 @@ export const fetchMovieById= createAsyncThunk("fetchMovieById",async(id)=>{
     const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/movie/${id}?api_key=${import.meta.env.VITE_API_KEY}`)
     return response.data
 })
-export const fetchMovieVideoById= createAsyncThunk("fetchMovieVideoById",async(id)=>{
-    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/movie/${id}/videos?api_key=${import.meta.env.VITE_API_KEY}&&language=en-US`)
-    return response.data.results[0].key
-})
+
+export const fetchMovieVideoById = createAsyncThunk("fetchMovieVideoById", async (id) => {
+    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/movie/${id}/videos?api_key=${import.meta.env.VITE_API_KEY}&&language=en-US`);
+    
+    if (response.data.results && response.data.results.length > 0) {
+        const trailer = response.data.results.find(video => video.type === 'Trailer' && video.site === 'YouTube');
+        return trailer ? trailer.key : null;
+    }
+    return null;
+});
 
 const initialState = {
     movie:[],
@@ -39,6 +45,12 @@ export const movieDetailsSlice = createSlice({
 
     builder.addCase(fetchMovieVideoById.fulfilled,(state,action)=>{
         state.key=action.payload
+    })
+    builder.addCase(fetchMovieVideoById.pending,(state)=>{
+        state.key=null
+    })
+    builder.addCase(fetchMovieVideoById.rejected,(state)=>{
+        state.key=null
     })
    
 }

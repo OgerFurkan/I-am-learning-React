@@ -1,25 +1,27 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import "../css/movie-details.css"
 import { fetchMovieById, fetchMovieVideoById } from '../redux/slices/movieDetailsSlice';
 import {fetchAllGenres} from "../redux/slices/genreSlice"
-import { MdStar} from "react-icons/md";
+import { removeFromFavorites,addToFavorites } from '../redux/slices/moviesSlice';
+import { MdFavoriteBorder,MdFavorite,MdStar} from "react-icons/md";
 
 
 function MovieDetails() {
     const dispatch = useDispatch()
     const params= useParams()
     const {id:movieId} = params;
-
     const {movie,status,error,key} = useSelector((store)=>store.movieDetails)
-
     const {genres:genreTitles,status:genreStatus,error:genreError} = useSelector((store)=>store.genres);
+    
+
+    const [isFavorite,setIsFavorite] = useState(false)
 
     const {backdrop_path,poster_path, genres,title,relase_date,vote_average,overview} = movie
 
-
     useEffect(()=>{
+        scrollToTop();
         dispatch(fetchMovieById(movieId))
         dispatch(fetchMovieVideoById(movieId))
     },[dispatch,movieId])
@@ -32,48 +34,87 @@ function MovieDetails() {
       const foundGenre = genreTitles.find(genre => genre.id === id);
       return foundGenre ? foundGenre.name : "Unknown Genre";
     };
+    const scrollToTop = () => {
+        window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+    };
+
+    
 
   return (
     <>
-    <img className='movie-details-backdrop' src={`https://image.tmdb.org/t/p/original/${backdrop_path}`} alt={title} />
-    <div className='movie-details-wrapper'>
-    <img className='movie-details-poster' src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} />
-    <div className="movie-details-info">
-      <div className="movie-details-title">
-        <p>{title}</p>
-        -
-        <p>
-          <MdStar/> {Number(vote_average).toFixed(1)}
-        </p>
-      </div>
-      <div className="movie-details-genres">
-        {
-          genres?.map((genreId)=>(
-            <span key={`${genreId.id}-${movieId}`}>{getGenreById(genreId.id)}</span>
-          ))
-        }
-      </div>
-          {
-            key ? 
-            <iframe className='movie-details-trailer'  
-            src={`https://www.youtube.com/embed/${key}?autoplay=1&mute=1`}
-            style={{ border: "0" }}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowFullScreen>
-          </iframe>:
-          <div className="movie-details-no-trailer">
-            Trailer Not founded
+  
+      <img className='movie-details-backdrop' src={`https://image.tmdb.org/t/p/original/${backdrop_path}`} alt={title} />
+
+      <div className='movie-details-wrapper'>
+        <div className='movie-details-poster-container'>
+             <span className="movie-details-fav">
+            {
+              isFavorite 
+              ? <MdFavorite  style={{color: "#f44531"}} className='movie-details-fav-icon' onClick={()=>{setIsFavorite(false), dispatch(removeFromFavorites(movieId))}} />
+              :<MdFavoriteBorder className='movie-details-fav-icon' onClick={()=>{setIsFavorite(true), dispatch(addToFavorites(movie))}} />
+            }
+          </span>
+
+          
+        {poster_path || backdrop_path ? (
+          <img
+            className='movie-details-poster'
+            src={`https://image.tmdb.org/t/p/w500/${
+              poster_path ? poster_path : backdrop_path
+            }`}
+            alt={title}
+          />
+        ) : (
+          <img
+            style={{ width: "500px", height: "709px" }}
+            className='movie-details-poster'
+            src="/images/Logo.png"
+            alt="No poster available"
+          />
+        )}
+        </div>
+     
+
+
+
+        <div className="movie-details-info">
+          <div className="movie-details-title">
+            <p>{title}</p>
+            -
+            <p className='movie-details-rate'>
+              <MdStar className='movie-details-rate-icon' /> {Number(vote_average).toFixed(1)}
+            </p>
           </div>
+          <div className="movie-details-genres" >
+           {
+            !genres || genres.length===0 ? <div>Genre not found</div> : 
+              genres?.map((genreId) => (
+                <span key={`${genreId.id}-${movieId}`}>{getGenreById(genreId.id)}</span>
+              ))
+           }
+          </div>
+          {
+            key ?
+              <iframe className='movie-details-trailer'
+                src={`https://www.youtube.com/embed/${key}?autoplay=1&mute=1`}
+                style={{ border: "0" }}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen>
+              </iframe> :
+              <div className="movie-details-no-trailer">
+                <p>Trailer Not Found</p>
+              </div>
           }
-        <p className="movie-details-desc">
-          {overview}
-        </p>
-
-      
-    </div>
-
-    </div>
-  </>
+          <h1 className='movie-details-desc-title'>Overview</h1>
+          <p className="movie-details-desc">
+            {overview}
+          </p>
+        </div>
+      </div>
+    </>
   )
 }
 

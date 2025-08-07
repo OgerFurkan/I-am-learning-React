@@ -1,5 +1,6 @@
 import { createSlice,createAsyncThunk } from '@reduxjs/toolkit'
 import axios from "axios"
+import { act } from 'react';
 
 export const getFavoritesFromLocalStorage = ()=>{
     const favorites = localStorage.getItem("favorites")
@@ -18,7 +19,6 @@ const initialState = {
 
 export const fetchMoviesByPage=createAsyncThunk("fetchAllMovies",async(page)=>{
     const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/movie/popular?api_key=${import.meta.env.VITE_API_KEY}&page=${page}`)
-    console.log(response.data.results)
     return response.data.results;
 })
 
@@ -32,11 +32,11 @@ export const moviesSlice = createSlice({
     },
     removeFromFavorites:(state,action)=>{
         const updatedFavList = state.favoritesMovies?.filter((fav)=>{
-           return fav.id!==action.payload
+           return fav.id!=action.payload
         })
         state.favoritesMovies=updatedFavList
         localStorage.setItem("favorites",JSON.stringify(updatedFavList))
-    } 
+    },
   },
   extraReducers:(builder)=>{
     builder.addCase(fetchMoviesByPage.pending,(state)=>{
