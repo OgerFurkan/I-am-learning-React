@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from "react-router-dom"
 import { useSelector,useDispatch } from 'react-redux';
 import { useEffect,useState } from 'react';
-import {addToFavorites,removeFromFavorites } from '../redux/slices/moviesSlice';
+import {addToFavorites,removeFromFavorites,IsFavorite} from '../redux/slices/moviesSlice';
 import {fetchAllGenres} from "../redux/slices/genreSlice"
 import "../css/movie.css"
 import { MdFavoriteBorder,MdFavorite,MdStar} from "react-icons/md";
@@ -11,15 +11,22 @@ import { MdFavoriteBorder,MdFavorite,MdStar} from "react-icons/md";
 function movie({movie}) {
     const dispatch=useDispatch();
 
+    const{favoritesMovies} = useSelector((store)=>store.movies)
+
     const {genre_ids,id,title,overview,poster_path,vote_average} = movie;
  
     const {genres,status:genreStatus,error:genreError} = useSelector((store)=>store.genres);
-    
-    const [isFavorite,setIsFavorite] = useState(false)
+
+ 
     
     useEffect(()=>{
         if(genreStatus=="idle") dispatch(fetchAllGenres())
     }, [dispatch, genreStatus])
+
+    const [fav,setFav]=useState("")
+    useEffect(()=>{
+        setFav(IsFavorite(id,favoritesMovies))
+    },[favoritesMovies])
 
     const getGenreById = (id) => {
         const foundGenre = genres.find(genre => genre.id === id);
@@ -28,15 +35,15 @@ function movie({movie}) {
 
   
 
-    
+
   return (
     
     <div className='movie-wrapper' >
         <span className="movie-fav">
                 {
-                isFavorite 
-                ? <MdFavorite  style={{color: "#f44531"}} className='fav-icon' onClick={()=>{setIsFavorite(false), dispatch(removeFromFavorites(id))}} /> 
-                : <MdFavoriteBorder className='fav-icon' onClick={()=>{setIsFavorite(true), dispatch(addToFavorites(movie))}} />
+                fav
+                ? <MdFavorite  style={{color: "#f44531"}} className='fav-icon' onClick={()=> dispatch(removeFromFavorites(id))} /> 
+                : <MdFavoriteBorder className='fav-icon' onClick={()=>dispatch(addToFavorites(movie))} />
                 }
         </span>
         <Link className='movie-link' to={`/movie-details/${id}`} >

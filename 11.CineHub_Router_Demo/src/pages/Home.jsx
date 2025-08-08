@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchMoviesByPage } from '../redux/slices/moviesSlice';
+import { fetchMoviesByPage} from '../redux/slices/moviesSlice';
 import Movie from '../components/movie';
 import "../css/home.css"
 import { IoIosArrowDroprightCircle,IoIosArrowDropleftCircle } from "react-icons/io";
 
 function Home() {
     const dispatch=useDispatch();
-    const {movies,status,error,favoritesMovies} = useSelector((store)=>store.movies);
+    const {movies,status,error} = useSelector((store)=>store.movies);
     const [page,setPage]=useState(1)
-    console.log(typeof page)
     
     useEffect(()=>{
       dispatch(fetchMoviesByPage(page))

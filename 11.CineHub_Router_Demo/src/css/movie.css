@@ -118,8 +118,20 @@
  .movie-wrapper{
     width: 300px;
     height: 450px;
- }
+}
  .movie-poster{
     width: 300px;
  }
+ .movie-infos{
+    height: 300px;
+    bottom: -300px;
+}
+ .movie-wrapper:hover .movie-infos{
+   transform: translateY(-300px);
+}
+ .movie-infos *{
+    font-size: 1rem;
+ }
+
+
 }

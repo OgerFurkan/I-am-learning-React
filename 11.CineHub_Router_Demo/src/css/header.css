@@ -108,6 +108,28 @@ header{
     max-height: 50vh;
     overflow-y: auto;
     overflow-x: hidden;
+    backdrop-filter: blur(5px);
+}
+
+.nav-results::-webkit-scrollbar {
+ width: 16px;  
+}
+.nav-results::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+.nav-results::-webkit-scrollbar-thumb {
+  background: #f445317a;
+  border-radius: 40px;
+  border: 3px solid #071426;
+  
+}
+.nav-results::-webkit-scrollbar-thumb:hover {
+  background: white;
+  cursor: pointer;
+}
+.nav-results::-webkit-scrollbar-thumb:active {
+  cursor: grabbing;
 }
 .nav-results a{
     text-decoration: none;
@@ -170,8 +192,7 @@ header{
 
 @media (max-width:1024px){
     header{
-        padding: 15px 3%;
-       
+        padding: 15px 3%;  
     }
 }
 @media (max-width:800px){
@@ -179,7 +200,6 @@ header{
         position: relative;
         background-color: #07142679; 
         padding-bottom: 20px;
-        margin-bottom: 10px;
         flex-direction: column;
     }
     #logo{

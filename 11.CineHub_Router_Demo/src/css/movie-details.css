@@ -239,12 +239,12 @@
 }
 @media (max-width:450px){
     .movie-details-poster-container{
-       width: 80%;
+       width: 100%;
     }
     .movie-details-poster{
         width: 100%;
     }
     .movie-details-info{
-        width: 80%
+        width: 100%
     }
 } 

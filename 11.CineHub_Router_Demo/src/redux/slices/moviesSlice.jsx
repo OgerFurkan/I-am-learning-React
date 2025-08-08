@@ -10,6 +10,10 @@ export const getFavoritesFromLocalStorage = ()=>{
     return [];
 }
 
+export const IsFavorite = (id, favorites) => {
+    return favorites?.some((movie) => movie.id === id);
+}
+
 const initialState = {
     movies: [],
     favoritesMovies:getFavoritesFromLocalStorage(),

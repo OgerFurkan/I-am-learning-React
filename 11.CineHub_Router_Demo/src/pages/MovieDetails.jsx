@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import "../css/movie-details.css"
 import { fetchMovieById, fetchMovieVideoById } from '../redux/slices/movieDetailsSlice';
 import {fetchAllGenres} from "../redux/slices/genreSlice"
-import { removeFromFavorites,addToFavorites } from '../redux/slices/moviesSlice';
+import { removeFromFavorites,addToFavorites,IsFavorite } from '../redux/slices/moviesSlice';
 import { MdFavoriteBorder,MdFavorite,MdStar} from "react-icons/md";
 
 
@@ -12,11 +12,17 @@ function MovieDetails() {
     const dispatch = useDispatch()
     const params= useParams()
     const {id:movieId} = params;
+
     const {movie,status,error,key} = useSelector((store)=>store.movieDetails)
+    const{favoritesMovies} = useSelector((store)=>store.movies)
     const {genres:genreTitles,status:genreStatus,error:genreError} = useSelector((store)=>store.genres);
     
 
-    const [isFavorite,setIsFavorite] = useState(false)
+    const [fav,setFav]=useState("")
+      useEffect(()=>{
+      setFav(IsFavorite(Number(movieId),favoritesMovies))
+    },[favoritesMovies])
+    
 
     const {backdrop_path,poster_path, genres,title,relase_date,vote_average,overview} = movie
 
@@ -51,14 +57,13 @@ function MovieDetails() {
       <div className='movie-details-wrapper'>
         <div className='movie-details-poster-container'>
              <span className="movie-details-fav">
-            {
-              isFavorite 
-              ? <MdFavorite  style={{color: "#f44531"}} className='movie-details-fav-icon' onClick={()=>{setIsFavorite(false), dispatch(removeFromFavorites(movieId))}} />
-              :<MdFavoriteBorder className='movie-details-fav-icon' onClick={()=>{setIsFavorite(true), dispatch(addToFavorites(movie))}} />
-            }
-          </span>
+                {
+                  fav 
+                  ? <MdFavorite  style={{color: "#f44531"}} className='movie-details-fav-icon' onClick={()=> dispatch(removeFromFavorites(movieId))} />
+                  :<MdFavoriteBorder className='movie-details-fav-icon' onClick={()=> dispatch(addToFavorites(movie))} />
+                }
+              </span>
 
-          
         {poster_path || backdrop_path ? (
           <img
             className='movie-details-poster'
