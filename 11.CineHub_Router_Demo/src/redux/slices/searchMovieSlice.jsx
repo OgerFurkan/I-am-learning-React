@@ -45,11 +45,11 @@ const searchMovieSlice = createSlice({
             })
             .addCase(fetchMovies.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.payload || 'Failed to fetch movies';
+                state.error = action.error.message || 'Failed to fetch movies';
             });
     },
 });
 
-export const {clearResults } = searchMovieSlice.actions;
+export const {clearResults} = searchMovieSlice.actions;
 
 export default searchMovieSlice.reducer;

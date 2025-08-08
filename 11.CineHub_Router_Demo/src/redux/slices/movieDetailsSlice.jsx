@@ -37,7 +37,7 @@ export const movieDetailsSlice = createSlice({
     })
       builder.addCase(fetchMovieById.rejected,(state)=>{
         state.status="failed"
-        state.error=action.payload;
+        state.error=action.error.message;
     })
      builder.addCase(fetchMovieById.pending,(state)=>{
         state.status="loading"

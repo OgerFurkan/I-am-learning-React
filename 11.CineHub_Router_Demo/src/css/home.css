@@ -5,6 +5,7 @@
     justify-content: center;
     gap: 50px;
     margin: 1% 0;
+    min-height: 100vh;
 }
 
 .home-main-title{
@@ -21,9 +22,10 @@
   height: 250px;
 }
 .logo{
-    height: 200px;
-    margin-bottom: 30px;
-    animation: spinLogo 5s linear infinite;
+  height: 200px;
+  margin-right: 10px;
+  margin-bottom: 30px;
+  animation: spinLogo 5s linear infinite;
 }
 
 @keyframes spinLogo {
@@ -95,8 +97,45 @@
   font-weight: bold;
   color: white;
 }
-.selected{
-  font-size: 2.5rem;
+.home-page-changer .selected{
+  font-size: 4rem;
+  transition: all 0.1s;
+}
+.home-page-changer:last-of-type .selected:hover{
+  transform: scale(1.4);
+  color: #071426;
+}
+.home-page-changer .selected:hover {
+  transform: scale(1.4);
+  color: #f44531;
+}
+.unselected{
+  color: rgba(255, 255, 255, 0.473);
+}
+
+.home-page-number-input{
+  color: white;
+  font-size: 2.5em;
+  font-weight: bold;
+  padding: 16px;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 40px;
+  width: 5%;
+  text-align: center;
+  outline: none;
+  -moz-appearance: textfield;
+}
+.home-page-number-input::-webkit-outer-spin-button,
+.home-page-number-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+@media (max-width:2100px) {
+  .home-page-number-input{
+    width: 10%;
+  }
 }
 
 @media (max-width:1440px) {
@@ -106,8 +145,10 @@
   .logo-name{
     display: none;
   }
+  .home-page-number-input{
+    width: 20%;
+  }
 }
-
 
 @media (max-width:800px) {
   .home-main-title{
@@ -115,6 +156,9 @@
   }
   .logo{
     height: 100px;
+  }
+  .home-page-number-input{
+    width: 30%;
   }
 }
 
@@ -125,5 +169,48 @@
   .logo{
     height: 50px;
   }
+  .home-page-number-input{
+    width: 100%;
+  }
 }
 
+
+
+
+.loader-wrapper {
+  align-self: flex-start;
+  margin-top: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  z-index: 9999;
+  background-color: #071426;
+  border-radius: 50%;
+}
+.loader-ring {
+  width: 120px;
+  height: 120px;
+  border: 12px solid #071426; 
+  border-top-color: #f44531; 
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+.loader-logo {
+  position: absolute;
+  width: 70px; 
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

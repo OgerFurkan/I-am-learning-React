@@ -247,4 +247,7 @@
     .movie-details-info{
         width: 100%
     }
+    .movie-details-wrapper .loader-wrapper{
+        align-self: center;
+    }
 } 

@@ -54,6 +54,12 @@ header{
     background-color: rgba(255, 255, 255, 0.1); 
 }
 
+.nav-link.active {
+  color: white;
+  border-bottom: 2px solid white; /* Alt çizgi ekledim, daha şık durur */
+}
+
+
 .count-favs{
     font-size: 16px;
     position: relative;
@@ -151,8 +157,7 @@ header{
     border: 1px solid white;
 }
 .nav-result-movie-poster-not-found{
-    min-width: 156px;
-    max-width: 156px;
+    width: 156px;
     height: 233px;
     border: 1px solid white;
     background-color: #071426;
@@ -186,13 +191,17 @@ header{
 
 @media (max-width:1440px){
     header{
-        padding: 15px 5%;
+        padding: 16px 5%;
     }
 }
 
 @media (max-width:1024px){
     header{
-        padding: 15px 3%;  
+        padding: 16px 3%;  
+    }
+    .nav-results{
+        left: 20%;
+        width: 60%;
     }
 }
 @media (max-width:800px){
@@ -231,6 +240,22 @@ header{
     .nav-search-icon{
         color: #fff;
         font-size: 1.5em;
+    }
+    .nav-results{
+        left: 5%;
+        width: 90%;
+        font-size: 0.6rem;
+    }
+    .nav-result-movie-title{
+        font-size: 1rem;
+    }
+    .nav-result-movie-poster{
+        width: 30%;
+        height: 100%;
+    }
+    .nav-result-movie-poster-not-found{
+        width: 76px;
+        height: 113px;
     }
 }
 

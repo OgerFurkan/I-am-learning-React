@@ -1,6 +1,5 @@
 import { createSlice,createAsyncThunk } from '@reduxjs/toolkit'
 import axios from "axios"
-import { act } from 'react';
 
 export const getFavoritesFromLocalStorage = ()=>{
     const favorites = localStorage.getItem("favorites")
@@ -48,7 +47,7 @@ export const moviesSlice = createSlice({
     })
     builder.addCase(fetchMoviesByPage.rejected,(state,action)=>{
         state.status="failed";
-        state.error=action.payload;
+        state.error=action.error.message;
     })
     builder.addCase(fetchMoviesByPage.fulfilled,(state,action)=>{
         state.status="succeeded";

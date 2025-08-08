@@ -54,8 +54,16 @@
     font-weight: bold;
     gap: 24px;
 }
+
+.movie-title span:first-child{
+    display: inline-block; 
+    max-width: 250px;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
 .movie-rate{
-    font-weight: normal;
+    margin-top: 2px;
 }
 
 .movie-rate-icon{

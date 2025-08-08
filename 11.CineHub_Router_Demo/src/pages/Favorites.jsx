@@ -1,10 +1,11 @@
 import React, { useState,useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import Movie from '../components/movie'
+import Movie from '../components/Movie'
 import { IoSearch } from "react-icons/io5";
 import "../css/favorites.css"
 import {MdFavorite} from "react-icons/md";
-import { Link, Links } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { RxCross1 } from "react-icons/rx";
 
 function Favorites() {
 
@@ -74,11 +75,17 @@ function Favorites() {
             <input type="text" className="search-input-favorite" id='search-input-favorite' placeholder='Search A Movie Name' value={query} onChange={(e)=>setQuery(e.target.value)}/>
 
             <label htmlFor="search-input-favorite">
-            <IoSearch className='favorite-search-icon'/>
+            {
+              query.length<1
+              ?
+                <IoSearch className='favorite-search-icon'/>
+              :
+                <RxCross1 className='favorite-search-icon' onClick={()=>setQuery("")}/>
+              }
             </label>
         </div>
 
-      <div className='movie-container'>
+      <div className='favorite-movie-wrapper'>
         {
          searchedMovie.length<=0 ? <div className='no-favorite-movie-info'>Favorite Movie Not Found!</div> : searchedMovie.map((movie)=>(
             <Movie key={movie.id} movie={movie}/>

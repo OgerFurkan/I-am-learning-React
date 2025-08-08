@@ -50,7 +50,7 @@ function movie({movie}) {
             <img className='movie-poster' src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} />
             <div className="movie-infos">
                 <p className='movie-title'>
-                    <span>{title}</span> - <MdStar className='movie-rate-icon'/>
+                    <span title={title} className='movie-title-ellipsis' >{title}</span> - <MdStar className='movie-rate-icon'/>
                     <span className="movie-rate">{Number(vote_average).toFixed(1)}</span>
                 </p>
                 <p className="movie-genres">
