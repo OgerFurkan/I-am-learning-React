@@ -1,5 +1,6 @@
 import { createSlice,createAsyncThunk } from '@reduxjs/toolkit'
 import axios from "axios"
+  import {toast } from 'react-toastify';
 
 export const getFavoritesFromLocalStorage = ()=>{
     const favorites = localStorage.getItem("favorites")
@@ -25,6 +26,27 @@ export const fetchMoviesByPage=createAsyncThunk("fetchAllMovies",async(page)=>{
     return response.data.results;
 })
 
+const customToast = (movieTitle,type) =>
+    toast(
+        <div className="custom-toast-wrapper">
+            <img className="custom-toast-icon" src="/images/Logo.png" alt="CineHub Logo" />
+            <div className="custom-toast-content">
+                {
+                    type==="add"
+                    ?
+                        <h3 className="custom-toast-title"> Movie<p className="custom-toast-status added">added</p>to favorites</h3>
+                    :
+                    <h3 className="custom-toast-title">Movie<p className="custom-toast-status removed">removed</p>from favorites</h3>
+                }
+                
+                <p className="custom-toast-movie-title">{movieTitle}</p>
+            </div>
+        </div>,
+        {
+            className: "custom-toast" 
+        }
+);
+
 export const moviesSlice = createSlice({
   name: 'movies',
   initialState,
@@ -32,13 +54,21 @@ export const moviesSlice = createSlice({
     addToFavorites:(state, action)=>{
         state.favoritesMovies.push(action.payload)
         localStorage.setItem("favorites",JSON.stringify(state.favoritesMovies))
+        customToast(action.payload.title,"add")
     },
     removeFromFavorites:(state,action)=>{
+        let title;
         const updatedFavList = state.favoritesMovies?.filter((fav)=>{
-           return fav.id!=action.payload
+           if(fav.id!=action.payload){
+            return fav
+           }
+           else{
+            title = fav.title
+           }
         })
         state.favoritesMovies=updatedFavList
         localStorage.setItem("favorites",JSON.stringify(updatedFavList))
+        customToast(title,"remove")
     },
   },
   extraReducers:(builder)=>{

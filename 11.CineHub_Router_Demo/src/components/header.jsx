@@ -17,12 +17,12 @@ function Header() {
   const {favoritesMovies} = useSelector((store)=> store.movies)
   const {movies} = useSelector((store)=> store.searchMovie)
 
-   const shakeAnimation = {
-      animationName: "heartbeat",
-      animationDuration: "0.1s",
-      animationIterationCount: "infinite",
-      animationTimingFunction: "linear"
-    }
+  const shakeAnimation = {
+    animationName: "heartbeat",
+    animationDuration: "0.1s",
+    animationIterationCount: "infinite",
+    animationTimingFunction: "linear"
+  }
 
     const [isAdded,setIsAdded]=useState(false)
   
@@ -81,15 +81,14 @@ function Header() {
             movies.length>0 ?
              <div className="nav-results">
             {
-                 movies?.map((movie)=>(
-                <Link to={`/movie-details/${movie.id}`}>
-                  <div key={movie.id} className="nav-result-movie-wrapper" onClick={handleClearResult}>
+              movies?.map((movie)=>(
+                <Link key={movie.id} to={`/movie-details/${movie.id}`}>
+                  <div className="nav-result-movie-wrapper" onClick={handleClearResult}>
                       {
                         <>
                           {
                             movie.poster_path ? <img className='nav-result-movie-poster' src={`https://image.tmdb.org/t/p/w154/${movie.poster_path}`} alt={movie.title} />:
-                            <img className='nav-result-movie-poster-not-found' src={"/images/Logo.png"} alt={movie.title}/>
-                            
+                            <img className='nav-result-movie-poster-not-found' src={"/images/Logo.png"} alt={movie.title}/>  
                           }
                           <div className="nav-result-movie-info">
                             <div className="nav-result-movie-header">

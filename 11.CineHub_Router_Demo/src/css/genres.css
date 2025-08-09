@@ -4,12 +4,15 @@
     padding: 0;
 }
 
+/*  Genre Page CSS  */
 .genres-container{
     min-height: 100vh;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
 }
+
+/*  Page Buttons CSS  */
 .genres-movies-container .home-page-changer:first-of-type> span.page-number.selected:hover{
     color:  #f44531;
     
@@ -17,7 +20,6 @@
 span.page-number.selected:hover{
     cursor: pointer;
 }
-
 .genres-movies-container > .home-page-changer:first-of-type .page-changer-icon{
    background-color: #f44531;
    color: #071426;
@@ -25,6 +27,8 @@ span.page-number.selected:hover{
 .genres-movies-container > .home-page-changer:first-of-type .page-changer-icon:hover{
    color: white;
 }
+
+/*  Aside CSS  */
 .genre-title{
     z-index: 2;
     position: sticky;
@@ -35,6 +39,7 @@ span.page-number.selected:hover{
     justify-content: flex-start;
     align-items: flex-start;
     width:1200px;
+    margin-bottom: -110px;
 }
 .genre{
     border-right: 1px solid white;
@@ -45,7 +50,7 @@ span.page-number.selected:hover{
     justify-content: center;
     align-items: center;
     width: 100%;
-    height:4.766vh;
+    height: calc((100vh - 123px)/19);
     background-color: #071426ce;
     color: white;
     font-size: 1rem;
@@ -70,6 +75,7 @@ span.page-number.selected:hover{
     background-color: #071426;
 }
 
+/*  Movies CSS  */
 .genres-movies-container{
     display: flex;
     flex-direction: column;
@@ -80,7 +86,6 @@ span.page-number.selected:hover{
     color: rgba(255, 255, 255, 0.603);
     font-size: 2.5rem;
 }
-
 .genre-movies{
     display: flex;
     flex-wrap: wrap;
@@ -89,11 +94,8 @@ span.page-number.selected:hover{
     align-items: flex-start;
 }
 
-@media (max-width: 2000px) {
-    .genre{
-        height:4.57vh;
-    }
-}
+
+/*  Responsiveness CSS  */
 @media (max-width: 1750px) {
     .genre-info-title{
         font-size: 2rem;
@@ -112,11 +114,9 @@ span.page-number.selected:hover{
         width: 1000px;
     }
     .genre{
-        height:4.73vh;
-        width: 100%;
+        height: calc((100vh - 94px)/19);
     }
 }
-
 @media (max-width: 900px) {
     .genre-title {
         position: static;
@@ -163,7 +163,6 @@ span.page-number.selected:hover{
     }
     
 }
-
 @media (max-width: 600px) {
     .genre-title {
         flex-wrap: wrap;
